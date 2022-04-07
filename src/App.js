@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import photo from './photo.jpg'
+class App extends React.Component  {
+  constructor(props) {
+    super(props);
+    this.state = {Person :{ fullName:"Rihab Aidi",
+                            bio:"Tunisian, business computing student, 22 years old,baccalaureate economy 2019",
+                            imgSrc:<img src={photo} alt='photo' style={{width:'35%' ,height:'500px' ,borderRadius:'50%'}}/>,
+                            profession:"business computing student"}, 
+                  show: false ,
+                  count: 0
+                   }
+  }
+ 
+  render() { 
+    console.log(this.state.show)
+    console.log(this.state.Person.imgSrc)
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return ( <div>
+     
+    
+      <button onClick={()=>this.setState({show:!this.state.show})} style={{width:'5%' ,height:'30px' ,borderRadius:'4px',border: "none",backgroundColor: "#008CBA",color: "white"}}>{this.state.show ? 'Hide':'Show'}</button>
+     
+      {
+        this.state.show &&( 
+          <center>
+            {this.state.Person.imgSrc}
+          <h2>{this.state.Person.fullName}</h2>
+          <h4>{this.state.Person.profession}</h4>
+          <p>{this.state.Person.bio}</p>
+          {this.state.count}
+          </center>
+          
+
+        )
+      }
+    </div> );
+  }
+
+componentDidMount(){
+  setInterval(() => {
+    this.setState(prevState => {
+      return {
+        count: prevState.count + 1,
+      };
+    });
+  }, 1000);
+  }
+
+
+
 }
-
+ 
 export default App;
